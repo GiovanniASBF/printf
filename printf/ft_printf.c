@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:35:42 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/11 15:08:47 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:49:15 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		i;
+	int		printed;
 
+	i = 0;
+	printed = 0;
 	va_start(args, format);
 	if (!format)
 		return (0);
@@ -29,11 +32,12 @@ int	ft_printf(const char *format, ...)
 		{
 			format++;
 			i = validate_format_specifier(*format);
-			/* verify the next char
-			make a function to verify wich function may be called based on the next char
-			after execute the function, move the pointer forward
-			*/
+			if (i != 0)
+				printvalue(i, args);
 		}
+		else
+			ft_putchar_fd(*format, 1);
+		format++;
 	}
 }
 
@@ -67,7 +71,7 @@ static	void	printvalue(int specifier, va_list args)
 		ft_putchar_fd(va_arg(args, char), 1);
 	else if (specifier == 2)
 		ft_putstr_fd(va_arg(args, char *), 1);
-	else if (specifier == 3)
+	else if (specifier == 5)
 	{
 		
 	}
