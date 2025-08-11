@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:35:42 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/11 13:13:26 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:08:47 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	ft_printf(const char *format, ...)
 			after execute the function, move the pointer forward
 			*/
 		}
-		
 	}
-	
 }
 
 static	int	validate_format_specifier(char *str)
@@ -50,15 +48,15 @@ static	int	validate_format_specifier(char *str)
 	else if (str[1] == 'd')
 		return (4);
 	else if (str[1] == 'i')
-		return (5);
+		return (4);
 	else if (str[1] == 'u')
-		return (6);
+		return (5);
 	else if (str[1] == 'x')
-		return (7);
+		return (6);
 	else if (str[1] == 'X')
-		return (8);
+		return (7);
 	else if (str[1] == '%')
-		return (9);
+		return (8);
 	else
 		return (0);
 }
@@ -71,7 +69,12 @@ static	void	printvalue(int specifier, va_list args)
 		ft_putstr_fd(va_arg(args, char *), 1);
 	else if (specifier == 3)
 	{
-		/* code */
+		
 	}
-	
+	else if (specifier == 4)
+		ft_putnbr_fd(va_arg(args, int), 1);
+	else if (specifier == 6)
+		ft_puthex_fd(va_arg(args, int), 0, 1);
+	else if (specifier == 7)
+		ft_puthex_fd(va_arg(args, int), 1, 1);
 }
