@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:35:42 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/11 15:49:15 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/11 16:01:16 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static	int	validate_format_specifier(char *str)
 	else if (str[1] == 'X')
 		return (7);
 	else if (str[1] == '%')
-		return (8);
+		return (1);
 	else
 		return (0);
 }
@@ -71,12 +71,10 @@ static	void	printvalue(int specifier, va_list args)
 		ft_putchar_fd(va_arg(args, char), 1);
 	else if (specifier == 2)
 		ft_putstr_fd(va_arg(args, char *), 1);
-	else if (specifier == 5)
-	{
-		
-	}
 	else if (specifier == 4)
 		ft_putnbr_fd(va_arg(args, int), 1);
+	else if (specifier == 5)
+		ft_putunbr_fd(va_arg(args, unsigned int), 1);
 	else if (specifier == 6)
 		ft_puthex_fd(va_arg(args, int), 0, 1);
 	else if (specifier == 7)

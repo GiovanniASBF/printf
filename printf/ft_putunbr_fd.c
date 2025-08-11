@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/10 11:50:52 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/11 15:58:23 by gaguiar-         ###   ########.fr       */
+/*   Created: 2025/08/11 15:54:01 by gaguiar-          #+#    #+#             */
+/*   Updated: 2025/08/11 15:56:44 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libftprintf.h"
 
-# include <stdarg.h>
-# include "libft.h"
-
-void	ft_puthex_fd(int n, int upper, int fd);
-void	ft_putptr_fd(void *ptr, int fd);
-void	ft_putunbr_fd(unsigned int n, int fd);
-
-#endif
+void	ft_putunbr_fd(unsigned int n, int fd)
+{
+	while (n > 9)
+		ft_putnbr_fd((n / 10), fd);
+	ft_putchar_fd((n % 10) + '0', fd);
+}
