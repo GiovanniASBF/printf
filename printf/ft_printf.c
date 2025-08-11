@@ -6,15 +6,19 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:35:42 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/11 12:28:40 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/11 13:13:26 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
+static	void	printvalue(int specifier, va_list args);
+static	int	validate_format_specifier(char *str);
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	int		i;
 
 	va_start(args, format);
 	if (!format)
@@ -23,6 +27,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
+			format++;
+			i = validate_format_specifier(*format);
 			/* verify the next char
 			make a function to verify wich function may be called based on the next char
 			after execute the function, move the pointer forward
@@ -55,4 +61,17 @@ static	int	validate_format_specifier(char *str)
 		return (9);
 	else
 		return (0);
+}
+
+static	void	printvalue(int specifier, va_list args)
+{
+	if (specifier == 1)
+		ft_putchar_fd(va_arg(args, char), 1);
+	else if (specifier == 2)
+		ft_putstr_fd(va_arg(args, char *), 1);
+	else if (specifier == 3)
+	{
+		/* code */
+	}
+	
 }

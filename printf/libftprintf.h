@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 11:50:52 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/10 11:54:44 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/11 12:35:58 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define LIBFTPRINTF_H
 
 # include <stdarg.h>
+# include "libft.h"
 
 #endif
