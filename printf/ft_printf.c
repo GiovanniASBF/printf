@@ -77,7 +77,7 @@ static	void	printvalue(int specifier, va_list args, int *ptrcount)
 	else if (specifier == 4)
 		ft_putnbr_fd(va_arg(args, int), 1);
 	else if (specifier == 5)
-		ft_putunbr_fd(va_arg(args, unsigned int), 1);
+		count_putunsnbr(va_arg(args, unsigned int), ptrcount);
 	else if (specifier == 6)
 		count_puthex(va_arg(args, int), 0, ptrcount);
 	else if (specifier == 7)

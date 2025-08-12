@@ -12,9 +12,9 @@
 
 #include "libftprintf.h"
 
-void	ft_putunbr_fd(unsigned int n, int fd)
+void	count_putunsnbr(unsigned int n, int *count)
 {
 	while (n > 9)
-		ft_putnbr_fd((n / 10), fd);
-	ft_putchar_fd((n % 10) + '0', fd);
+		count_putunsnbr((n / 10), count);
+	count_putchar((n % 10) + '0', count);
 }

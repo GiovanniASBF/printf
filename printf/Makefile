@@ -3,7 +3,7 @@ NAME = libftprintf.a
 SRC = ft_printf.c \
 	count_puthex.c \
 	count_putptr.c \
-	ft_putunbr_fd.c \
+	count_putunsnbr.c \
 	print.c
 
 OBJ = $(SRC:.c=.o)
