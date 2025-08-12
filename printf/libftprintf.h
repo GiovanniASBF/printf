@@ -19,5 +19,7 @@
 void	ft_puthex_fd(int n, int upper, int fd);
 void	ft_putptr_fd(void *ptr, int fd);
 void	ft_putunbr_fd(unsigned int n, int fd);
+void	count_putchar(char c, int *count);
+void	count_putstr(char *str, int *count);
 
 #endif
