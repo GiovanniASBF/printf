@@ -3,6 +3,7 @@ NAME = libftprintf.a
 SRC = ft_printf.c \
 	count_puthex.c \
 	count_putptr.c \
+	count_putnbr.c \
 	count_putunsnbr.c \
 	print.c
 

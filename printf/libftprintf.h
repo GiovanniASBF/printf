@@ -18,6 +18,7 @@
 
 void	count_puthex(int n, int upper, int *count);
 void	count_putptr(void *ptr, int *count);
+void	count_putnbr(int n, int *count);
 void	count_putunsnbr(unsigned int n, int *count);
 void	count_putchar(char c, int *count);
 void	count_putstr(char *str, int *count);
