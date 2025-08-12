@@ -12,7 +12,7 @@
 
 #include	"libftprintf.h"
 
-void	ft_puthex_fd(int n, int upper, int fd)
+void	count_puthex(int n, int upper, int *count)
 {
 	int	remainder;
 	int	ui_n;
@@ -20,19 +20,19 @@ void	ft_puthex_fd(int n, int upper, int fd)
 	ui_n = (unsigned int)n;
 	if (ui_n == 0)
 	{
-		write(fd, "0", 1);
+		write(1, "0", 1);
 		return ;
 	}
 	if ((ui_n / 16) != 0)
-		ft_puthex_fd((ui_n / 16), upper, fd);
+		count_puthex((ui_n / 16), upper, count);
 	remainder = ui_n % 16;
 	if (remainder < 10)
-		ft_putchar_fd(remainder + '0', fd);
+		count_putchar(remainder + '0', count);
 	else
 	{
 		if (upper)
-			ft_putchar_fd(remainder - 10 + 'A', fd);
+			count_putchar(remainder - 10 + 'A', count);
 		else
-			ft_putchar_fd(remainder - 10 + 'a', fd);
+			count_putchar(remainder - 10 + 'a', count);
 	}
 }

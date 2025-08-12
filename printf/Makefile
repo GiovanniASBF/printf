@@ -1,8 +1,8 @@
 NAME = libftprintf.a
 
 SRC = ft_printf.c \
-	ft_puthex_fd.c \
-	ft_putptr_fd.c \
+	count_puthex.c \
+	count_putptr.c \
 	ft_putunbr_fd.c \
 	print.c
 

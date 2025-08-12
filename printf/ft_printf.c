@@ -73,13 +73,13 @@ static	void	printvalue(int specifier, va_list args, int *ptrcount)
 	else if (specifier == 2)
 		count_putstr(va_arg(args, char *), ptrcount);
 	else if (specifier == 3)
-		ft_putptr_fd(va_arg(args, void *), 1);
+		count_putptr(va_arg(args, void *), ptrcount);
 	else if (specifier == 4)
 		ft_putnbr_fd(va_arg(args, int), 1);
 	else if (specifier == 5)
 		ft_putunbr_fd(va_arg(args, unsigned int), 1);
 	else if (specifier == 6)
-		ft_puthex_fd(va_arg(args, int), 0, 1);
+		count_puthex(va_arg(args, int), 0, ptrcount);
 	else if (specifier == 7)
-		ft_puthex_fd(va_arg(args, int), 1, 1);
+		count_puthex(va_arg(args, int), 1, ptrcount);
 }

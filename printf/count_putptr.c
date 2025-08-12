@@ -12,8 +12,8 @@
 
 #include "libftprintf.h"
 
-void	ft_putptr_fd(void *ptr, int fd)
+void	count_putptr(void *ptr, int *count)
 {
-	ft_putstr_fd("0x", fd);
-	ft_puthex_fd((unsigned long)ptr, 0, fd);
+	count_putstr("0x", count);
+	count_puthex((unsigned long)ptr, 0, count);
 }
