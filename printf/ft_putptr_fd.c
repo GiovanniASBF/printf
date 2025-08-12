@@ -15,5 +15,5 @@
 void	ft_putptr_fd(void *ptr, int fd)
 {
 	ft_putstr_fd("0x", fd);
-	ft_puthex_fd((unsigned int)ptr, 0, fd);
+	ft_puthex_fd((unsigned long)ptr, 0, fd);
 }
