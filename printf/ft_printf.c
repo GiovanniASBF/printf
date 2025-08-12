@@ -12,16 +12,18 @@
 
 #include "libftprintf.h"
 
-static	void	printvalue(int specifier, va_list args);
+static	void	printvalue(int specifier, va_list args, int *ptrcount);
 static	int	validate_format_specifier(char *str);
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	int		count;
 	int		i;
-	int		printed;
+	int		*ptrcount;
 
-	printed = 0;
+	count = 0;
+	ptrcount = &count;
 	va_start(args, format);
 	if (!format)
 		return (0);
@@ -29,51 +31,47 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
 			i = validate_format_specifier(*format);
 			if (i != 0)
-				printvalue(i, args);
+				printvalue(i, args, ptrcount);
 		}
 		else
-		{
-			ft_putchar_fd(*format, 1);
-			printed++;
-		}
+			count_putchar(*format, ptrcount);
 		format++;
 	}
-	return (printed);
+	return (count);
 }
 
 static	int	validate_format_specifier(char *str)
 {
-	if (str[1] == 'c')
+	if (!ft_strncmp("%c", *str, 2))
 		return (1);
-	else if (str[1] == 's')
+	else if (!ft_strncmp("%s", *str, 2))
 		return (2);
-	else if (str[1] == 'p')
+	else if (!ft_strncmp("%p", *str, 2))
 		return (3);
-	else if (str[1] == 'd')
+	else if (!ft_strncmp("%d", *str, 2))
 		return (4);
-	else if (str[1] == 'i')
+	else if (!ft_strncmp("%i", *str, 2))
 		return (4);
-	else if (str[1] == 'u')
+	else if (!ft_strncmp("%u", *str, 2))
 		return (5);
-	else if (str[1] == 'x')
+	else if (!ft_strncmp("%x", *str, 2))
 		return (6);
-	else if (str[1] == 'X')
+	else if (!ft_strncmp("%X", *str, 2))
 		return (7);
-	else if (str[1] == '%')
+	else if (!ft_strncmp("%%", *str, 2))
 		return (1);
 	else
 		return (0);
 }
 
-static	void	printvalue(int specifier, va_list args)
+static	void	printvalue(int specifier, va_list args, int *ptrcount)
 {
 	if (specifier == 1)
-		ft_putchar_fd(va_arg(args, char), 1);
+		count_putchar(va_arg(args, char), ptrcount);
 	else if (specifier == 2)
-		ft_putstr_fd(va_arg(args, char *), 1);
+		count_putstr(va_arg(args, char *), ptrcount);
 	else if (specifier == 3)
 		ft_putptr_fd(va_arg(args, void *), 1);
 	else if (specifier == 4)
