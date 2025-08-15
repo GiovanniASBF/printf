@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 01:55:05 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/15 01:56:12 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/15 02:21:15 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	input_handler(va_list args, const char *format, int *count)
 		if (*format == '%')
 		{
 			specifier_handler(format, args, count);
-			format = format + 2;
+			format += 2;
 		}
 		print_char(*format, count);
 		format++;
