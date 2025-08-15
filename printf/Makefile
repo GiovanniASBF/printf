@@ -27,11 +27,11 @@ $(LIBFT):
 
 clean:
 	rm -f $(OBJ)
-	$(MAKE) -c libft clean
+	$(MAKE) -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -c libft fclean
+	$(MAKE) -C libft fclean
 
 re: fclean all
 
