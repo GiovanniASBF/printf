@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 02:01:40 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/15 02:01:50 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/15 02:31:12 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@ char			*itohex(unsigned long ptr, char *base);
 char	*ptr_to_str(void *ptr)
 {
 	char	*hex;
+	char	*str;
 
 	hex = itohex((unsigned long)ptr, "0123456789abcdef");
-	return (ft_strjoin("0x", hex));
+	if (!hex)
+		return (NULL);
+	str = ft_strjoin("0x", hex);
+	free(hex);
+	return (str);
 }
 
 char	*itohex(unsigned long ptr, char *base)
