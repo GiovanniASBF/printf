@@ -62,7 +62,7 @@ char	*argument_validator(va_list args, int identifier)
 {
 	char	*str;
 
-	if ((identifier == 1 || identifier == 8) && (char)va_arg(args, int))
+	if (identifier == 1 && (char)va_arg(args, int))
 		return (ft_strdup((char)va_arg(args, int)));
 	else if (identifier == 2 && va_arg(args, char *))
 		return (ft_strdup(va_arg(args, char *)));
@@ -71,7 +71,18 @@ char	*argument_validator(va_list args, int identifier)
 	else if (identifier == 4 && va_arg(args, int))
 		return (ft_itoa(va_arg(args, int)));
 	else if (identifier == 5 && va_arg(args, unsigned int))
-		return ()
+		return (unsin_to_char(va_arg(args, unsigned int)));
+	else if ((identifier == 6 || identifier == 7) && va_arg(args, unsigned int))
+	{
+		if (identifier == 6)
+			return (itohex(va_arg(args, unsigned int), "0123456789abcdef"));
+		else
+			return (itohex(va_arg(args, unsigned int), "0123456789ABCDEF"));
+	}
+	else if (identifier == 8)
+		return (ft_strdup("%"));
+	else
+		return (ft_strdup(""));
 }
 
 int	specifier_identifier(const char *str)

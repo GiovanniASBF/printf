@@ -14,6 +14,7 @@
 
 static size_t	hexlen(unsigned long ptr);
 char			*itohex(unsigned long ptr, char *base);
+int				numsize(unsigned int n);
 
 char	*ptr_to_str(void *ptr)
 {
@@ -61,29 +62,40 @@ static size_t	hexlen(unsigned long ptr)
 	return (i);
 }
 
-void	put_count_nbr(int n, int *count)
+char	*unsin_to_char(unsigned int n)
 {
-	if (n == -2147483648)
+	int		len;
+	char	*str;
+
+	len = numsize(n);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	str[len--] = 0;
+	if (n == 0 && len == 0)
 	{
-		print_str("-2147483648", count);
-		return ;
+		str[len] = '0';
+		return (str);
 	}
-	else if (n < 0)
+	while (n > 0)
 	{
-		print_char('-', count);
-		put_count_nbr(-n, count);
+		str[len--] = (n % 10) + '0';
+		n /= 10;
 	}
-	else
-	{
-		if (n > 9)
-			put_count_nbr(n / 10, count);
-		print_char((n % 10) + '0', count);
-	}
+	return (str);
 }
 
-void	put_count_unbr(unsigned int n, int *count)
+int	numsize(unsigned int n)
 {
-	if (n > 9)
-		put_count_unbr(n / 10, count);
-	print_char((n % 10) + '0', count);
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
 }

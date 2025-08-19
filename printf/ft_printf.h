@@ -22,7 +22,6 @@ int		ft_printf(const char *format, ...);
 void	print_char(char c, int *count);
 void	print_str(char *str, int *count);
 char	*ptr_to_str(void *ptr);
-void	put_count_nbr(int n, int *count);
-void	put_count_unbr(unsigned int n, int *count);
+char	*unsin_to_char(unsigned int n);
 
 #endif
