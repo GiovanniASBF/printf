@@ -32,29 +32,19 @@ void	input_handler(va_list args, const char *format, int *count)
 
 void	specifier_handler(const char *str, va_list args, int *count)
 {
-	if (!ft_strncmp(str, "%c", 2))
-		print_char((char)va_arg(args, int), count);
-	else if (!ft_strncmp(str, "%s", 2))
-		print_str(va_arg(args, char *), count);
-	else if (!ft_strncmp(str, "%p", 2))
-		print_str(ptr_to_str(va_arg(args, void *)), count);
-	else if (!ft_strncmp(str, "%d", 2) || !ft_strncmp(str, "%i", 2))
-		put_count_nbr(va_arg(args, int), count);
-	else if (!ft_strncmp(str, "%u", 2))
-		put_count_unbr(va_arg(args, unsigned int), count);
-	else if (!ft_strncmp(str, "%x", 2))
-		print_str(itohex(va_arg(args, unsigned int), "0123456789abcdef"),
-			count);
-	else if (!ft_strncmp(str, "%X", 2))
-		print_str(itohex(va_arg(args, unsigned int), "0123456789ABCDEF"),
-			count);
-	else if (!ft_strncmp(str, "%%", 2))
-		print_char('%', count);
+	int		identifier;
+	char	*arg_verified;
+
+	identifier = specifier_identifier(str);
+	if (identifier > 0)
+	{
+		arg_verified = argument_validator(args, identifier);
+		print_str(arg_verified, count);
+	}
 	else
 	{
 		print_char(*str, count);
-		str++;
-		print_char(*str, count);
+		print_char(*(str + 1), count);
 	}
 }
 
