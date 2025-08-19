@@ -12,7 +12,9 @@
 
 #include "ft_printf.h"
 
+char	*argument_validator(va_list args, int identifier);
 void	specifier_handler(const char *str, va_list args, int *count);
+int		specifier_identifier(const char *str);
 
 void	input_handler(va_list args, const char *format, int *count)
 {
@@ -54,4 +56,42 @@ void	specifier_handler(const char *str, va_list args, int *count)
 		str++;
 		print_char(*str, count);
 	}
+}
+
+char	*argument_validator(va_list args, int identifier)
+{
+	char	*str;
+
+	if ((identifier == 1 || identifier == 8) && (char)va_arg(args, int))
+		return (ft_strdup((char)va_arg(args, int)));
+	else if (identifier == 2 && va_arg(args, char *))
+		return (ft_strdup(va_arg(args, char *)));
+	else if (identifier == 3 && va_arg(args, void *))
+		return (ptr_to_str(va_arg(args, void *)));
+	else if (identifier == 4 && va_arg(args, int))
+		return (ft_itoa(va_arg(args, int)));
+	else if (identifier == 5 && va_arg(args, unsigned int))
+		return ()
+}
+
+int	specifier_identifier(const char *str)
+{
+	if (!ft_strncmp(str, "%c", 2))
+		return (1);
+	else if (!ft_strncmp(str, "%s", 2))
+		return (2);
+	else if (!ft_strncmp(str, "%p", 2))
+		return (3);
+	else if (!ft_strncmp(str, "%d", 2) || !ft_strncmp(str, "%i", 2))
+		return (4);
+	else if (!ft_strncmp(str, "%u", 2))
+		return (5);
+	else if (!ft_strncmp(str, "%x", 2))
+		return (6);
+	else if (!ft_strncmp(str, "%X", 2))
+		return (7);
+	else if (!ft_strncmp(str, "%%", 2))
+		return (8);
+	else
+		return (0);
 }
