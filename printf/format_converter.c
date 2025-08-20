@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 02:01:40 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/15 02:31:12 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:13:52 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 static size_t	hexlen(unsigned long ptr);
 char			*itohex(unsigned long ptr, char *base);
-int				numsize(unsigned int n);
 
-char	*ptr_to_str(void *ptr)
+void	ptr_to_str(void *ptr, int *count)
 {
 	char	*hex;
 	char	*str;
 
 	hex = itohex((unsigned long)ptr, "0123456789abcdef");
 	if (!hex)
-		return (NULL);
+		return ;
 	str = ft_strjoin("0x", hex);
+	if (!str)
+		return ;
 	free(hex);
-	return (str);
+	print_str(str, count);
+	free(str);
 }
 
 char	*itohex(unsigned long ptr, char *base)
@@ -35,9 +37,9 @@ char	*itohex(unsigned long ptr, char *base)
 	size_t	i;
 	size_t	len;
 
-	len = hexlen(ptr) + 1;
+	len = hexlen(ptr);
 	i = len;
-	hex = malloc(len * sizeof(char));
+	hex = malloc((len + 1) * sizeof(char));
 	if (!hex)
 		return (NULL);
 	hex[i--] = 0;
@@ -62,40 +64,29 @@ static size_t	hexlen(unsigned long ptr)
 	return (i);
 }
 
-char	*unsin_to_char(unsigned int n)
+void	put_count_nbr(int n, int *count)
 {
-	int		len;
-	char	*str;
-
-	len = numsize(n);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len--] = 0;
-	if (n == 0 && len == 0)
+	if (n == -2147483648)
 	{
-		str[len] = '0';
-		return (str);
+		print_str("-2147483648", count);
+		return ;
 	}
-	while (n > 0)
+	else if (n < 0)
 	{
-		str[len--] = (n % 10) + '0';
-		n /= 10;
+		print_char('-', count);
+		put_count_nbr(-n, count);
 	}
-	return (str);
+	else
+	{
+		if (n > 9)
+			put_count_nbr(n / 10, count);
+		print_char((n % 10) + '0', count);
+	}
 }
 
-int	numsize(unsigned int n)
+void	put_count_unbr(unsigned int n, int *count)
 {
-	int	len;
-
-	len = 0;
-	if (n == 0)
-		return (1);
-	while (n > 0)
-	{
-		n = n / 10;
-		len++;
-	}
-	return (len);
+	if (n > 9)
+		put_count_unbr(n / 10, count);
+	print_char((n % 10) + '0', count);
 }

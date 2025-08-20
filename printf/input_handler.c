@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 01:55:05 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/20 16:24:53 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:16:36 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,34 @@ void	input_handler(va_list args, const char *format, int *count)
 		if (*format == '%')
 		{
 			specifier_handler(format, args, count);
-			format += 2;
+			format ++;
 		}
-		print_char(*format, count);
+		else
+			print_char(*format, count);
 		format++;
 	}
 }
 
 void	specifier_handler(const char *str, va_list args, int *count)
 {
-	int		identifier;
-	char	*arg_verified;
-
-	identifier = specifier_identifier(str);
-	if (identifier > 0)
-	{
-		arg_verified = argument_validator(args, identifier);
-		print_str(arg_verified, count);
-		free(arg_verified);
-	}
+	if (!ft_strncmp(str, "%c", 2))
+		print_char((char)va_arg(args, int), count);
+	else if (!ft_strncmp(str, "%s", 2))
+		print_str(va_arg(args, char *), count);
+	else if (!ft_strncmp(str, "%p", 2))
+		ptr_to_str(va_arg(args, void *), count);
+	else if (!ft_strncmp(str, "%d", 2) || !ft_strncmp(str, "%i", 2))
+		put_count_nbr(va_arg(args, int), count);
+	else if (!ft_strncmp(str, "%u", 2))
+		put_count_unbr(va_arg(args, unsigned int), count);
+	else if (!ft_strncmp(str, "%x", 2))
+		print_str(itohex(va_arg(args, unsigned int), "0123456789abcdef"),
+			count);
+	else if (!ft_strncmp(str, "%X", 2))
+		print_str(itohex(va_arg(args, unsigned int), "0123456789ABCDEF"),
+			count);
+	else if (!ft_strncmp(str, "%%", 2))
+		print_char('%', count);
 	else
 	{
 		print_char(*str, count);
