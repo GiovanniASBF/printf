@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 01:55:05 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/20 17:16:36 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/20 18:22:52 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ void	specifier_handler(const char *str, va_list args, int *count)
 	else if (!ft_strncmp(str, "%u", 2))
 		put_count_unbr(va_arg(args, unsigned int), count);
 	else if (!ft_strncmp(str, "%x", 2))
-		print_str(itohex(va_arg(args, unsigned int), "0123456789abcdef"),
-			count);
+		itohex(va_arg(args, unsigned int), "0123456789abcdef", count);
 	else if (!ft_strncmp(str, "%X", 2))
-		print_str(itohex(va_arg(args, unsigned int), "0123456789ABCDEF"),
-			count);
+		itohex(va_arg(args, unsigned int), "0123456789ABCDEF", count);
 	else if (!ft_strncmp(str, "%%", 2))
 		print_char('%', count);
 	else

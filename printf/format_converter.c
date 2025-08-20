@@ -6,49 +6,48 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 02:01:40 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/20 17:13:52 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/20 18:24:05 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static size_t	hexlen(unsigned long ptr);
-char			*itohex(unsigned long ptr, char *base);
+void			itohex(unsigned long ptr, char *base, int *count);
 
 void	ptr_to_str(void *ptr, int *count)
 {
-	char	*hex;
-	char	*str;
-
-	hex = itohex((unsigned long)ptr, "0123456789abcdef");
-	if (!hex)
-		return ;
-	str = ft_strjoin("0x", hex);
-	if (!str)
-		return ;
-	free(hex);
-	print_str(str, count);
-	free(str);
+	if (!ptr)
+		print_str("nil", count);
+	else
+	{
+		print_str("0x", count);
+		itohex((unsigned long)ptr, "0123456789abcdef", count);
+	}
 }
 
-char	*itohex(unsigned long ptr, char *base)
+void	itohex(unsigned long ptr, char *base, int *count)
 {
 	char	*hex;
 	size_t	i;
 	size_t	len;
 
-	len = hexlen(ptr);
-	i = len;
+	if (ptr == 0)
+		len = 1;
+	else
+		len = hexlen(ptr);
 	hex = malloc((len + 1) * sizeof(char));
 	if (!hex)
-		return (NULL);
+		return ;
+	i = len;
 	hex[i--] = 0;
-	while (i >= 0)
+	while (ptr != 0)
 	{
 		hex[i--] = base[ptr % 16];
 		ptr = ptr / 16;
 	}
-	return (hex);
+	print_str(hex, count);
+	free(hex);
 }
 
 static size_t	hexlen(unsigned long ptr)
