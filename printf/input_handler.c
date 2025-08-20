@@ -40,6 +40,7 @@ void	specifier_handler(const char *str, va_list args, int *count)
 	{
 		arg_verified = argument_validator(args, identifier);
 		print_str(arg_verified, count);
+		free(arg_verified);
 	}
 	else
 	{
