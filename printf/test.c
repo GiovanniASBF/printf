@@ -2,5 +2,6 @@
 
 int main(void)
 {
-	printf("%p %p", 0, 0);
+	int t = 14 % 16;
+	printf("%i", t);
 }

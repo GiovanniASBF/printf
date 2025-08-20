@@ -6,7 +6,7 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 02:01:40 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/20 18:24:05 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/20 19:32:17 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,22 @@ void	itohex(unsigned long ptr, char *base, int *count)
 	size_t	len;
 
 	if (ptr == 0)
-		len = 1;
+		print_char('0', count);
 	else
-		len = hexlen(ptr);
-	hex = malloc((len + 1) * sizeof(char));
-	if (!hex)
-		return ;
-	i = len;
-	hex[i--] = 0;
-	while (ptr != 0)
 	{
-		hex[i--] = base[ptr % 16];
-		ptr = ptr / 16;
+		len = hexlen(ptr);
+		hex = ft_calloc((len + 1), sizeof(char));
+		if (!hex)
+			return ;
+		i = len - 1;
+		while (ptr != 0)
+		{
+			hex[i--] = base[ptr % 16];
+			ptr = ptr / 16;
+		}
+		print_str(hex, count);
+		free(hex);
 	}
-	print_str(hex, count);
-	free(hex);
 }
 
 static size_t	hexlen(unsigned long ptr)
