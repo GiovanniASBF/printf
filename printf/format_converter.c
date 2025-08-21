@@ -6,27 +6,27 @@
 /*   By: gaguiar- <gaguiar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 02:01:40 by gaguiar-          #+#    #+#             */
-/*   Updated: 2025/08/20 19:32:17 by gaguiar-         ###   ########.fr       */
+/*   Updated: 2025/08/21 15:18:14 by gaguiar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static size_t	hexlen(unsigned long ptr);
-void			itohex(unsigned long ptr, char *base, int *count);
+void			printhex(unsigned long ptr, char *base, int *count);
 
-void	ptr_to_str(void *ptr, int *count)
+void	printptr(void *ptr, int *count)
 {
 	if (!ptr)
-		print_str("nil", count);
+		print_str("(nil)", count);
 	else
 	{
 		print_str("0x", count);
-		itohex((unsigned long)ptr, "0123456789abcdef", count);
+		printhex((unsigned long)ptr, "0123456789abcdef", count);
 	}
 }
 
-void	itohex(unsigned long ptr, char *base, int *count)
+void	printhex(unsigned long ptr, char *base, int *count)
 {
 	char	*hex;
 	size_t	i;
@@ -64,7 +64,7 @@ static size_t	hexlen(unsigned long ptr)
 	return (i);
 }
 
-void	put_count_nbr(int n, int *count)
+void	printnbr(int n, int *count)
 {
 	if (n == -2147483648)
 	{
@@ -74,19 +74,19 @@ void	put_count_nbr(int n, int *count)
 	else if (n < 0)
 	{
 		print_char('-', count);
-		put_count_nbr(-n, count);
+		printnbr(-n, count);
 	}
 	else
 	{
 		if (n > 9)
-			put_count_nbr(n / 10, count);
+			printnbr(n / 10, count);
 		print_char((n % 10) + '0', count);
 	}
 }
 
-void	put_count_unbr(unsigned int n, int *count)
+void	printunbr(unsigned int n, int *count)
 {
 	if (n > 9)
-		put_count_unbr(n / 10, count);
+		printunbr(n / 10, count);
 	print_char((n % 10) + '0', count);
 }
