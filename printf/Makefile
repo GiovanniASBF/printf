@@ -35,7 +35,24 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+# New rules for testing
+TEST_SRC = test.c
+TEST_NAME = a.out
+TEST_OBJ = $(TEST_SRC:.c=.o)
+
+test: $(NAME) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(TEST_OBJ) -L. -lftprintf -o $(TEST_NAME)
+
+$(TEST_OBJ): $(TEST_SRC)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+test_run: test
+	./$(TEST_NAME)
+
+test_clean:
+	rm -f $(TEST_OBJ) $(TEST_NAME)
+
+.PHONY: all bonus clean fclean re test test_run test_clean
 
 # the -I flag add a directory to the list of places where 
 # the compiler should search for the header files.
