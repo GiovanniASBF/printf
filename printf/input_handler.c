@@ -12,7 +12,9 @@
 
 #include "ft_printf.h"
 
-void	input_handler(va_list args, const char *format, int *count)
+static t_format	ft_pntf_get_format_info(const char *str);
+
+void	ft_pntf_input_handler(va_list args, const char *format, int *count)
 {
 	int	consumed_len;
 	
@@ -31,7 +33,7 @@ void	input_handler(va_list args, const char *format, int *count)
 	}
 }
 
-int	specifier_handler(const char *str, va_list args, int *count)
+int	ft_pntf_specifier_handler(const char *str, va_list args, int *count)
 {
 	if (!ft_strncmp(str, "%c", 2))
 		print_char((char)va_arg(args, int), count);
@@ -54,4 +56,16 @@ int	specifier_handler(const char *str, va_list args, int *count)
 		print_char(*str, count);
 		print_char(*(str + 1), count);
 	}
+}
+
+static t_format	ft_pntf_get_format_info(const char *str)
+{
+	t_format	info;
+	char		specifier;
+
+	specifier = str[2];
+	info.conversion_type = '\0';
+	if (ft_strchr("cspdiuxX%", specifier))
+		info.conversion_type = specifier;
+	return (info);
 }

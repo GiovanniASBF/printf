@@ -16,7 +16,12 @@
 # include "libft.h"
 # include <stdarg.h>
 
-void	input_handler(va_list args, const char *format, int *count);
+typedef struct	s_format
+{
+	char	conversion_type;
+}			t_format;
+
+void	ft_pntf_input_handler(va_list args, const char *format, int *count);
 void	printhex(unsigned long ptr, char *base, int *count);
 int		ft_printf(const char *format, ...);
 void	print_char(char c, int *count);
@@ -24,6 +29,6 @@ void	print_str(char *str, int *count);
 void	printptr(void *ptr, int *count);
 void	printnbr(int n, int *count);
 void	printunbr(unsigned int n, int *count);
-int		specifier_handler(const char *str, va_list args, int *count);
+int		ft_pntf_specifier_handler(const char *str, va_list args, int *count);
 
 #endif
