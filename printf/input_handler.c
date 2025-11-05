@@ -35,27 +35,31 @@ void	ft_pntf_input_handler(va_list args, const char *format, int *count)
 
 int	ft_pntf_specifier_handler(const char *str, va_list args, int *count)
 {
-	if (!ft_strncmp(str, "%c", 2))
+	t_format	info;
+
+	info = ft_pntf_get_format_info(str);
+	if (info.conversion_type == 'c')
 		print_char((char)va_arg(args, int), count);
-	else if (!ft_strncmp(str, "%s", 2))
+	else if (info.conversion_type == 's')
 		print_str(va_arg(args, char *), count);
-	else if (!ft_strncmp(str, "%p", 2))
+	else if (info.conversion_type == 'p')
 		printptr(va_arg(args, void *), count);
-	else if (!ft_strncmp(str, "%d", 2) || !ft_strncmp(str, "%i", 2))
+	else if (info.conversion_type == 'd' || info.conversion_type == 'i')
 		printnbr(va_arg(args, int), count);
-	else if (!ft_strncmp(str, "%u", 2))
+	else if (info.conversion_type == 'u')
 		printunbr(va_arg(args, unsigned int), count);
-	else if (!ft_strncmp(str, "%x", 2))
+	else if (info.conversion_type == 'x')
 		printhex(va_arg(args, unsigned int), "0123456789abcdef", count);
-	else if (!ft_strncmp(str, "%X", 2))
+	else if (info.conversion_type == 'X')
 		printhex(va_arg(args, unsigned int), "0123456789ABCDEF", count);
-	else if (!ft_strncmp(str, "%%", 2))
+	else if (info.conversion_type == '%')
 		print_char('%', count);
 	else
 	{
-		print_char(*str, count);
-		print_char(*(str + 1), count);
+		print_char(str, count);
+		print_char(str[2], count);
 	}
+	return (2);
 }
 
 static t_format	ft_pntf_get_format_info(const char *str)
