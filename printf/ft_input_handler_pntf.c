@@ -24,11 +24,11 @@ void	ft_pntf_input_handler(va_list args, const char *format, int *count)
 		{
 			if (*(format + 1) == '\0')
 				break ;
-			consumed_len = specifier_handler(format, args, count);
+			consumed_len = ft_pntf_specifier_handler(format, args, count);
 			format += consumed_len;
 		}
 		else
-			print_char(*format, count);
+			ft_pntf_print_char(*format, count);
 		format++;
 	}
 }
@@ -39,25 +39,25 @@ int	ft_pntf_specifier_handler(const char *str, va_list args, int *count)
 
 	info = ft_pntf_get_format_info(str);
 	if (info.conversion_type == 'c')
-		print_char((char)va_arg(args, int), count);
+		ft_pntf_print_char((char)va_arg(args, int), count);
 	else if (info.conversion_type == 's')
-		print_str(va_arg(args, char *), count);
+		ft_pntf_print_str(va_arg(args, char *), count);
 	else if (info.conversion_type == 'p')
-		printptr(va_arg(args, void *), count);
+		ft_pntf_printptr(va_arg(args, void *), count);
 	else if (info.conversion_type == 'd' || info.conversion_type == 'i')
-		printnbr(va_arg(args, int), count);
+		ft_pntf_printnbr(va_arg(args, int), count);
 	else if (info.conversion_type == 'u')
-		printunbr(va_arg(args, unsigned int), count);
+		ft_pntf_printunbr(va_arg(args, unsigned int), count);
 	else if (info.conversion_type == 'x')
-		printhex(va_arg(args, unsigned int), "0123456789abcdef", count);
+		ft_pntf_printhex(va_arg(args, unsigned int), "0123456789abcdef", count);
 	else if (info.conversion_type == 'X')
-		printhex(va_arg(args, unsigned int), "0123456789ABCDEF", count);
+		ft_pntf_printhex(va_arg(args, unsigned int), "0123456789ABCDEF", count);
 	else if (info.conversion_type == '%')
-		print_char('%', count);
+		ft_pntf_print_char('%', count);
 	else
 	{
-		print_char(str, count);
-		print_char(str[2], count);
+		ft_pntf_print_char(*str, count);
+		ft_pntf_print_char(str[1], count);
 	}
 	return (2);
 }
@@ -67,7 +67,7 @@ static t_format	ft_pntf_get_format_info(const char *str)
 	t_format	info;
 	char		specifier;
 
-	specifier = str[2];
+	specifier = str[1];
 	info.conversion_type = '\0';
 	if (ft_strchr("cspdiuxX%", specifier))
 		info.conversion_type = specifier;

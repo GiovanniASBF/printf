@@ -2,10 +2,10 @@ NAME = libftprintf.a
 
 LIBFT = libft/libft.a
 
-SRC = format_converter.c \
+SRC = ft_format_converter_pntf.c \
+	ft_input_handler_pntf.c \
 	ft_printf.c \
-	input_handler.c \
-	printer.c\
+	ft_printer_pntf.c\
 
 OBJ = $(SRC:.c=.o)
 

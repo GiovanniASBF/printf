@@ -21,7 +21,7 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	ptr_count = &count;
 	va_start(args, format);
-	input_handler(args, format, ptr_count);
+	ft_pntf_input_handler(args, format, ptr_count);
 	va_end(args);
 	return (count);
 }

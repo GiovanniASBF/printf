@@ -12,31 +12,31 @@
 
 #include "ft_printf.h"
 
-static size_t	hexlen(unsigned long ptr);
-void			printhex(unsigned long ptr, char *base, int *count);
+static size_t	ft_pntf_hexlen(unsigned long ptr);
+void			ft_pntf_printhex(unsigned long ptr, char *base, int *count);
 
-void	printptr(void *ptr, int *count)
+void	ft_pntf_printptr(void *ptr, int *count)
 {
 	if (!ptr)
-		print_str("(nil)", count);
+		ft_pntf_print_str("(nil)", count);
 	else
 	{
-		print_str("0x", count);
-		printhex((unsigned long)ptr, "0123456789abcdef", count);
+		ft_pntf_print_str("0x", count);
+		ft_pntf_printhex((unsigned long)ptr, "0123456789abcdef", count);
 	}
 }
 
-void	printhex(unsigned long ptr, char *base, int *count)
+void	ft_pntf_printhex(unsigned long ptr, char *base, int *count)
 {
 	char	*hex;
 	size_t	i;
 	size_t	len;
 
 	if (ptr == 0)
-		print_char('0', count);
+		ft_pntf_print_char('0', count);
 	else
 	{
-		len = hexlen(ptr);
+		len = ft_pntf_hexlen(ptr);
 		hex = ft_calloc((len + 1), sizeof(char));
 		if (!hex)
 			return ;
@@ -46,12 +46,12 @@ void	printhex(unsigned long ptr, char *base, int *count)
 			hex[i--] = base[ptr % 16];
 			ptr = ptr / 16;
 		}
-		print_str(hex, count);
+		ft_pntf_print_str(hex, count);
 		free(hex);
 	}
 }
 
-static size_t	hexlen(unsigned long ptr)
+static size_t	ft_pntf_hexlen(unsigned long ptr)
 {
 	size_t	i;
 
@@ -64,29 +64,29 @@ static size_t	hexlen(unsigned long ptr)
 	return (i);
 }
 
-void	printnbr(int n, int *count)
+void	ft_pntf_printnbr(int n, int *count)
 {
 	if (n == -2147483648)
 	{
-		print_str("-2147483648", count);
+		ft_pntf_print_str("-2147483648", count);
 		return ;
 	}
 	else if (n < 0)
 	{
-		print_char('-', count);
-		printnbr(-n, count);
+		ft_pntf_print_char('-', count);
+		ft_pntf_printnbr(-n, count);
 	}
 	else
 	{
 		if (n > 9)
-			printnbr(n / 10, count);
-		print_char((n % 10) + '0', count);
+			ft_pntf_printnbr(n / 10, count);
+		ft_pntf_print_char((n % 10) + '0', count);
 	}
 }
 
-void	printunbr(unsigned int n, int *count)
+void	ft_pntf_printunbr(unsigned int n, int *count)
 {
 	if (n > 9)
-		printunbr(n / 10, count);
-	print_char((n % 10) + '0', count);
+		ft_pntf_printunbr(n / 10, count);
+	ft_pntf_print_char((n % 10) + '0', count);
 }

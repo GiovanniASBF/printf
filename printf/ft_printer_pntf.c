@@ -12,22 +12,22 @@
 
 #include "ft_printf.h"
 
-void	print_char(char c, int *count)
+void	ft_pntf_print_char(char c, int *count)
 {
 	write(1, &c, 1);
 	(*count)++;
 }
 
-void	print_str(char *str, int *count)
+void	ft_pntf_print_str(char *str, int *count)
 {
 	if (str == NULL)
 	{
-		print_str("(null)", count);
+		ft_pntf_print_str("(null)", count);
 		return ;
 	}
 	while (*str)
 	{
-		print_char(*str, count);
+		ft_pntf_print_char(*str, count);
 		str++;
 	}
 }

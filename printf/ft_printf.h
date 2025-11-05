@@ -22,13 +22,13 @@ typedef struct	s_format
 }			t_format;
 
 void	ft_pntf_input_handler(va_list args, const char *format, int *count);
-void	printhex(unsigned long ptr, char *base, int *count);
+void	ft_pntf_printhex(unsigned long ptr, char *base, int *count);
 int		ft_printf(const char *format, ...);
-void	print_char(char c, int *count);
-void	print_str(char *str, int *count);
-void	printptr(void *ptr, int *count);
-void	printnbr(int n, int *count);
-void	printunbr(unsigned int n, int *count);
+void	ft_pntf_print_char(char c, int *count);
+void	ft_pntf_print_str(char *str, int *count);
+void	ft_pntf_printptr(void *ptr, int *count);
+void	ft_pntf_printnbr(int n, int *count);
+void	ft_pntf_printunbr(unsigned int n, int *count);
 int		ft_pntf_specifier_handler(const char *str, va_list args, int *count);
 
 #endif
