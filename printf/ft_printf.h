@@ -24,5 +24,6 @@ void	print_str(char *str, int *count);
 void	printptr(void *ptr, int *count);
 void	printnbr(int n, int *count);
 void	printunbr(unsigned int n, int *count);
+int		specifier_handler(const char *str, va_list args, int *count);
 
 #endif

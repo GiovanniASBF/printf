@@ -12,16 +12,18 @@
 
 #include "ft_printf.h"
 
-void	specifier_handler(const char *str, va_list args, int *count);
-
 void	input_handler(va_list args, const char *format, int *count)
 {
+	int	consumed_len;
+	
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			specifier_handler(format, args, count);
-			format ++;
+			if (*(format + 1) == '\0')
+				break ;
+			consumed_len = specifier_handler(format, args, count);
+			format += consumed_len;
 		}
 		else
 			print_char(*format, count);
@@ -29,7 +31,7 @@ void	input_handler(va_list args, const char *format, int *count)
 	}
 }
 
-void	specifier_handler(const char *str, va_list args, int *count)
+int	specifier_handler(const char *str, va_list args, int *count)
 {
 	if (!ft_strncmp(str, "%c", 2))
 		print_char((char)va_arg(args, int), count);
