@@ -21,3 +21,14 @@ My implementation supports the following standard format specifiers:
 
 ### Return Value
 Just like the standard `printf`, `ft_printf` returns the total **number of characters printed** (excluding the null byte used to end output to strings). If an error occurs, it returns a negative number.
+
+## 🧠 Key Learnings: Variadic Functions
+
+A **variadic function** can accept a flexible number of arguments. Unlike standard functions with a fixed set of parameters, it handles an unknown number of inputs at compile time.
+
+Implementing this required mastering the `<stdarg.h>` macros:
+
+* **`va_list`**: A specialized type that acts as a pointer/cursor to the list of variable arguments.
+* **`va_start(va_list ap, last_fixed_arg)`**: Initializes the `va_list` cursor. It needs the last fixed argument to locate the start of the variable arguments in the stack.
+* **`va_arg(va_list ap, type)`**: Retrieves the next argument. Crucially, you must specify the expected **type** (e.g., `int`, `char *`) so it knows how many bytes to read and how to interpret them.
+* **`va_end(va_list ap)`**: Cleans up the `va_list` cursor after all arguments have been processed.
