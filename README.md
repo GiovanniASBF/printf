@@ -1,43 +1,23 @@
 # ft_printf
-## A reimplementation of the printf function in C language
-A project to deepen my knowledge about variadic functions, strings manipulation and memory management in C.
 
 ## Overview
-This project is an implementation of the iconic printf function of the standard C library (<stdio.h>), developed as part of 42SP curriculum. The main goal was to implement the handling of a variable number of arguments and the strings formatting logic based in format specifiers.
+**ft_printf** is a reimplementation of the `printf` function from the C standard library (`<stdio.h>`). Developed as part of the 42SP curriculum, this project aims to deepen understanding of variadic functions, string formatting, and low-level memory management in C.
 
-## Key learnings
-### Variadic Functions
-A variadic function is a function that can accept a variable number of arguments. Instead of declare a fixed number of parameters, it's projected to deal with a list of arguments whose size isn't known at compile-time.
-To implement a variadic function, there's four main steps:
+The primary goal was to create a robust function capable of handling a variable number of arguments and formatting them according to specific placeholders, mimicking the behavior of the original function.
 
-- va_list: It's basically a pointer used to store the arguments list. Just think of it as a "cursor" that will point to each argument, one at a time.
+## ✨ Features (Format Specifiers)
+My implementation supports the following standard format specifiers:
 
-- va_start(argument_pointer, last_fixed): Initialize the arguments list. The first argument is the list itself. The last one is the last known argument, the part that doesn't vary. It's very important, because it will use its memory address to find where the variable arguments begin in the call stack.
+| Specifier | Description | Example Output |
+| :---: | :--- | :--- |
+| `%c` | Single character | `a` |
+| `%s` | String of characters | `Hello, World!` |
+| `%p` | Pointer address (in hexadecimal) | `0x7ffeefbff6d8` |
+| `%d` / `%i`| Signed decimal integer | `-42` |
+| `%u` | Unsigned decimal integer | `42` |
+| `%x` | Unsigned hexadecimal (lowercase) | `2a` |
+| `%X` | Unsigned hexadecimal (uppercase) | `2A` |
+| `%%` | Literal percent sign | `%` |
 
-- va_arg(argument_pointer, type): Access the current argument in the list and move the "cursor" to the next. You must tell it what data type is expected. It returns a value and moves the pointer to the next argument position, so you must know what data type you're reading.
-
-- va_end(ap): Clears the arguments list.
-
-## Format Specifiers Implemented
-- `%c` – Character  
-
-
-- `%s` – String  
-
-
-- `%p` – Pointer address  
-
-
-- `%d` or `%i` – Signed decimal integer  
-
-
-- `%u` – Unsigned decimal integer  
-
-
-- `%x` – Hexadecimal (lowercase)  
-
-
-- `%X` – Hexadecimal (uppercase)  
-
-
-- `%%` – A literal percent sign  
+### Return Value
+Just like the standard `printf`, `ft_printf` returns the total **number of characters printed** (excluding the null byte used to end output to strings). If an error occurs, it returns a negative number.
